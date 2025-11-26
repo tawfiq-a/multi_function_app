@@ -5,7 +5,7 @@ import 'package:timezone/timezone.dart' as tz;
 
 import 'package:camera/camera.dart';
 
-import 'alarm_screen.dart';
+import 'alarm/alarm_screen.dart';
 
 
 List<CameraDescription> cameras = [];
@@ -48,7 +48,7 @@ class AlarmApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AlarmHomePage(),
+      home: AlarmScreen(),
     );
   }
 }

@@ -55,6 +55,6 @@ class AlarmReceiver : BroadcastReceiver() {
             .setAutoCancel(true)
 
         //  Display Notification
-        notificationManager.notify(1, builder.build()) // You can use unique ID if multiple alarms
+        notificationManager.notify(1, builder.build())
     }
 }

@@ -17,10 +17,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   void initState() {
     super.initState();
-    _controller = CameraController(
-      widget.camera,
-      ResolutionPreset.medium,
-    );
+    _controller = CameraController(widget.camera, ResolutionPreset.medium);
 
     _initializeControllerFuture = _controller.initialize();
   }
@@ -43,9 +40,9 @@ class _CameraScreenState extends State<CameraScreen> {
     } catch (e) {
       print(e);
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to take picture: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Failed to take picture: $e')));
       }
     }
   }
