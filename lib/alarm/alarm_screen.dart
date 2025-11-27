@@ -346,6 +346,25 @@ class _AlarmScreenState extends State<AlarmScreen> {
                   ),
                 ],
               ),
+              const SizedBox(height: 30),
+
+// 🔹 VIEW INSTALLED APPS BUTTON
+              SizedBox(
+                height: 60,
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    _homeService.openInstalledAppsScreen();
+                  },
+                  icon: const Icon(Icons.apps, size: 28),
+                  label: const Text('View Installed Apps'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.teal.shade700,
+                    foregroundColor: Colors.white,
+                  ),
+                ),
+              ),
+
 
               const SizedBox(height: 40),
 

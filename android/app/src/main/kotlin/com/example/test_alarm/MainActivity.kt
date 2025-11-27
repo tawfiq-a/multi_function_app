@@ -1,10 +1,9 @@
-
 package com.example.test_alarm
+
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
-
 
 class MainActivity : FlutterActivity() {
     private val CHANNEL = "com.example.alarm_clock/alarm"
@@ -12,33 +11,41 @@ class MainActivity : FlutterActivity() {
     private lateinit var alarmHandler: AlarmHandler
     private lateinit var locationHandler: LocationHandler
     private lateinit var dataHandler: DataHandler
+    private lateinit var appInfoHandler: AppInfoHandler
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        //  Initializ all handlers
+        // Initialize all handlers
         alarmHandler = AlarmHandler(this)
         locationHandler = LocationHandler(this)
         dataHandler = DataHandler(this)
+        appInfoHandler = AppInfoHandler(this)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL)
+            .setMethodCallHandler { call, result ->
 
-            when (call.method) {
-                // Alarm handle
-                "setAlarm" -> alarmHandler.setAlarm(call, result)
-                "cancelAlarm" -> alarmHandler.cancelAlarm(result)
+                when (call.method) {
 
-                // Location Handle
-                "getCurrentLocation" -> locationHandler.getCurrentLocation(result)
-                "getAddressFromCoordinates" -> locationHandler.getAddressFromCoordinates(call, result)
+                    // Alarm Handler
+                    "setAlarm" -> alarmHandler.setAlarm(call, result)
+                    "cancelAlarm" -> alarmHandler.cancelAlarm(result)
 
-                // Sms and contact handle
-                "getSmsList" -> dataHandler.getSmsList(result)
-                "getContactsList" -> dataHandler.getContactsList(result)
+                    // Location Handler
+                    "getCurrentLocation" -> locationHandler.getCurrentLocation(result)
+                    "getAddressFromCoordinates" ->
+                        locationHandler.getAddressFromCoordinates(call, result)
 
-                else -> result.notImplemented()
+                    // Contacts & SMS Handler
+                    "getSmsList" -> dataHandler.getSmsList(result)
+                    "getContactsList" -> dataHandler.getContactsList(result)
+
+                    // 🔥 NEW — App Info Handler
+                    "getInstalledApps" -> appInfoHandler.getInstalledApps(result)
+                    "getAppDetails" -> appInfoHandler.getAppDetails(call, result)
+
+                    else -> result.notImplemented()
+                }
             }
-        }
     }
-
 }
