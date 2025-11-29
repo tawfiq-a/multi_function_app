@@ -26,6 +26,8 @@ class AppsInfoScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final package = appsList[index];
 
+
+
           return ListTile(
             title: Text(package),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
